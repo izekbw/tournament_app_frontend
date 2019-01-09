@@ -1,0 +1,19 @@
+@import './global-variables.less';
+
+header {
+    position: relative;
+
+    img.logo-image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 70%;
+        cursor: pointer;
+        outline: none;
+
+      @media @md-and-lower {
+        display: none;
+      }
+    }
+}
