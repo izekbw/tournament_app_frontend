@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://127.0.0.1:8000/api/'
+  apiUrl: 'http://127.0.0.1:8000/api/',
+  apiImgUrl: 'http://127.0.0.1:8000/img/'
 };
 /*
  * For easier debugging in development mode, you can import the following file

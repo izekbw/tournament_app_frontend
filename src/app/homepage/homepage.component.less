@@ -1,0 +1,62 @@
+@import '../global-variables.less';
+
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.games-section {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.single-game {
+
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+
+  .game-images {
+    position: relative;
+  }
+
+  .game-image {
+    width: 100%;
+    filter: brightness(60%);
+  }
+
+  .game-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+  }
+
+  .game-info {
+    flex-grow: 1;
+
+    >* {
+      display: block;
+      margin: 10px 0 10px 0;
+    }
+
+    .header-text {
+      font-size: 1.5em;
+      font-weight: bolder;
+    }
+  }
+
+  .website-link {
+    align-self: flex-end;
+  }
+}
+
+.homepage-section {
+
+}
