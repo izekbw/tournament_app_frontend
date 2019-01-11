@@ -1,4 +1,4 @@
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div id="app" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <span class="mdl-layout-title hidden-xs">{{ currentUser }}</span>
@@ -15,10 +15,9 @@
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">{{ currentUser }}</span>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
+      <a (click)="toggleMaterialDrawer()" *ngFor="let game of games" class="mdl-navigation__link" routerLink="/tournaments/{{ game.id }}/{{ game.shortName }}">
+        <i class="material-icons">label_important</i> {{ game.shortName }} Tournaments
+      </a>
     </nav>
   </div>
   <main class="mdl-layout__content">
