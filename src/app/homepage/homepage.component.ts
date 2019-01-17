@@ -19,12 +19,13 @@ export class HomepageComponent implements OnInit {
   apiImgUrl = environment.apiImgUrl;
 
   ngOnInit() {
+    this.upgradeDom();
     this.getAllGames();
   }
 
   getAllGames() {
     this.ajaxCall = true;
-    this.http.get(environment.apiUrl+'game/get')
+    this.http.get(environment.apiUrl + 'game/get')
       .subscribe(
         response => {
           this.ajaxCall = false;
@@ -35,7 +36,7 @@ export class HomepageComponent implements OnInit {
           this.ajaxCall = false;
           this.popupType = 'error-popup';
           this.popupMessage = 'Could not retrieve data.';
-        })
+        });
   }
 
   upgradeDom() {

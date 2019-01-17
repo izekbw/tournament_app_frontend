@@ -1,1 +1,54 @@
-{{ gameId }}
+<div class="tournaments-page col-xs-12">
+  <span *ngIf="popupType" [ngClass]="popupType" class="mdl-chip mdl-chip--deletable">
+    <span class="mdl-chip__text">{{ popupMessage }}</span>
+    <button (click)="closePopup()" type="button" class="mdl-chip__action"><i class="material-icons">cancel</i></button>
+  </span>
+
+  <div [hidden]="!ajaxCall" id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+
+  <div *ngIf="openTournaments.length" class="full-width">
+    <h2>Open tournaments</h2>
+
+    <div class="games-section">
+      <div *ngFor="let tournament of openTournaments" class="single-game col-sm-4 col-xs-12">
+        <div class="game-images">
+          <img class="game-image" src="{{ apiImgUrl + tournament.game.imageUrl }}" alt="game-image">
+          <img class="game-logo" src="{{ apiImgUrl + tournament.game.logoUrl }}" alt="logo-url">
+        </div>
+        <div class="game-info">
+          <span class="header-text">{{ tournament.name }}</span>
+          <span>{{ tournament.description }}</span>
+        </div>
+        <div class="tournament-count tournament-count-active">
+          0 / {{ tournament.teams_number }}
+        </div>
+        <a *ngIf="currentUser" class="website-link" routerLink="/">
+          <button (mouseenter)="upgradeDom()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Register your team
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="startedTournaments.length" class="full-width">
+    <h2>Tournaments in progress</h2>
+
+    <div class="games-section">
+      <div *ngFor="let tournament of startedTournaments" class="single-game col-sm-4 col-xs-12">
+        <div class="game-images">
+          <img class="game-image" src="{{ apiImgUrl + tournament.game.imageUrl }}" alt="game-image">
+          <img class="game-logo" src="{{ apiImgUrl + tournament.game.logoUrl }}" alt="logo-url">
+        </div>
+        <div class="game-info">
+          <span class="header-text">{{ tournament.name }}</span>
+          <span>{{ tournament.description }}</span>
+        </div>
+        <div class="tournament-count tournament-count-started">
+          Tournament in progress
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

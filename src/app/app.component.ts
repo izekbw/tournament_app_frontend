@@ -31,12 +31,15 @@ export class AppComponent implements OnInit {
       .subscribe(
         response => {
             this.games = response['games'];
-        }
-      )
+        },
+
+      error => {
+          console.log(error);
+      });
   }
 
   toggleMaterialDrawer() {
     // @ts-ignore
-    document.getElementById('app').MaterialLayout.toggleDrawer()
+    document.getElementById('app').MaterialLayout.toggleDrawer();
   }
 }

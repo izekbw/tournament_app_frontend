@@ -1,0 +1,80 @@
+@import '../global-variables.less';
+
+
+.tournaments-page {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.games-section {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.single-game {
+  box-shadow: 0 6px 12px 0 rgba(0,0,0,0.12), 0 4px 8px 0 rgba(0,0,0,0.08);
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+
+  .game-images {
+    padding-top: 15px;
+    position: relative;
+  }
+
+  .game-image {
+    width: 100%;
+    filter: brightness(60%);
+  }
+
+  .game-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+  }
+
+  .game-info {
+    flex-grow: 1;
+
+    > * {
+      display: block;
+      margin: 10px 0 10px 0;
+    }
+
+    .header-text {
+      font-size: 1.5em;
+      font-weight: bolder;
+    }
+  }
+
+  .website-link {
+    align-self: flex-end;
+  }
+}
+
+.tournament-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 20px 0;
+  font-size: 1.7em;
+  font-weight: bold;
+}
+
+.tournament-count-active {
+  color: @color-green;
+}
+
+.tournament-count-started {
+  color: @color-accent;
+}
+
+.full-width {
+  margin-bottom: 25px;
+}
