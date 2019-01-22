@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TournamentsComponent } from './tournaments/tournaments.component';
+import { TeamsComponent } from './teams/teams.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { TournamentsComponent } from './tournaments/tournaments.component';
     LoginComponent,
     RegisterComponent,
     TournamentsComponent,
+    TeamsComponent,
   ],
   imports: [
     BrowserModule,

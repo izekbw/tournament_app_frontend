@@ -26,27 +26,29 @@ export class RegisterComponent implements OnInit {
   }
 
   registerAccount() {
-    this.ajaxCall = true;
-    const user = {
-      'username': this.username,
-      'password': this.password
-    };
+    if (!this.ajaxCall) {
+      this.ajaxCall = true;
+      const user = {
+        'username': this.username,
+        'password': this.password
+      };
 
-    this.http.post(environment.apiUrl + 'register', user)
-      .subscribe(
-        response => {
-          this.ajaxCall = false;
-          this.popupType = 'success-popup';
-          this.popupMessage = response['message'];
-        },
-        error => {
-          this.ajaxCall = false;
-          this.popupType = 'error-popup';
-          this.popupMessage = error['error']['message'];
-          if (!this.popupMessage) {
-            this.popupMessage = 'Unexpected error';
-          }
-        });
+      this.http.post(environment.apiUrl + 'register', user)
+        .subscribe(
+          response => {
+            this.ajaxCall = false;
+            this.popupType = 'success-popup';
+            this.popupMessage = response['message'];
+          },
+          error => {
+            this.ajaxCall = false;
+            this.popupType = 'error-popup';
+            this.popupMessage = error['error']['message'];
+            if (!this.popupMessage) {
+              this.popupMessage = 'Unexpected error';
+            }
+          });
+    }
   }
 
   closePopup() {

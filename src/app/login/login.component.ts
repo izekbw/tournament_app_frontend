@@ -33,28 +33,30 @@ export class LoginComponent implements OnInit {
   }
 
   loginAccount() {
-    this.ajaxCall = true;
-    const user = {
-      'username': this.username,
-      'password': this.password
-    };
+    if (!this.ajaxCall) {
+      this.ajaxCall = true;
+      const user = {
+        'username': this.username,
+        'password': this.password
+      };
 
-    this.http.post(environment.apiUrl + 'login', user)
-      .subscribe(
-        response => {
-          this.popupType = 'success-popup';
-          this.popupMessage = response['message'];
-          this.utilService.login(response['username'], response['uuid']);
-        },
+      this.http.post(environment.apiUrl + 'login', user)
+        .subscribe(
+          response => {
+            this.popupType = 'success-popup';
+            this.popupMessage = response['message'];
+            this.utilService.login(response['username'], response['uuid']);
+          },
 
-        error => {
-          this.ajaxCall = false;
-          this.popupType = 'error-popup';
-          this.popupMessage = error['error']['message'];
-          if (!this.popupMessage) {
-            this.popupMessage = 'Unexpected error';
-          }
-        });
+          error => {
+            this.ajaxCall = false;
+            this.popupType = 'error-popup';
+            this.popupMessage = error['error']['message'];
+            if (!this.popupMessage) {
+              this.popupMessage = 'Unexpected error';
+            }
+          });
+    }
   }
 
   closePopup() {

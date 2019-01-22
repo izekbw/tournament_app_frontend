@@ -1,0 +1,85 @@
+<div class="team-page col-xs-12">
+
+  <div class="ajax-container">
+    <span *ngIf="popupType" [ngClass]="popupType" class="mdl-chip mdl-chip--deletable">
+      <span class="mdl-chip__text">{{ popupMessage }}</span>
+      <button (click)="closePopup()" type="button" class="mdl-chip__action"><i class="material-icons">cancel</i></button>
+    </span>
+
+    <div [hidden]="!ajaxCall" id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+  </div>
+
+  <div class="team-page-content">
+    <div class="row">
+      <div class="col-sm-6 col-xs-12 create-team-container">
+        <h3>Create a new team</h3>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input (keydown.enter)="createTeam()" [readOnly]="!activeTeamnameInput" (focus)="activeTeamnameInput=true" (blur)="activeTeamnameInput=false" [(ngModel)]="teamname" class="mdl-textfield__input" type="text" id="teamname">
+          <label class="mdl-textfield__label" for="teamname">Teamname</label>
+        </div>
+        <button [disabled]="ajaxCall" (click)="createTeam()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+          Create
+        </button>
+      </div>
+      <div class="col-sm-6 col-xs-12 create-team-container">
+        <h3>Invite members</h3>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input (keydown.enter)="inviteMember()" [(ngModel)]="invitedMember" class="mdl-textfield__input" type="text" id="invitedMember">
+          <label class="mdl-textfield__label" for="invitedMember">Invite a player!</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <select [(ngModel)]="selectedTeamId" class="mdl-textfield__input" id="select-team">
+            <option *ngFor="let team of teamsWithRoster" [value]="team.team_id">{{ team.team_name }}</option>
+          </select>
+          <label class="mdl-textfield__label" for="select-team">Select Team</label>
+        </div>
+        <button [disabled]="ajaxCall" (click)="inviteMember()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+          Invite
+        </button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Your team invites</h3>
+        <div (mouseenter)="upgradeDom()" *ngFor="let invite of invites" class="invite-row">
+          <div class="team-name">
+            {{ invite.teamName }}
+          </div>
+          <div class="action-buttons">
+            <button [disabled]="ajaxCall" (click)="acceptInvite(invite.id)" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+              Accept
+            </button>
+            <button [disabled]="ajaxCall" (click)="denyInvite(invite.id)" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+              Deny
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 my-teams-container">
+          <h3>My teams</h3>
+          <ul *ngFor="let team of teamsWithRoster" class="mdl-list">
+            <li>
+              <span class="team-name">{{ team.team_name }}</span>
+            </li>
+            <li *ngFor="let member of team.roster" class="mdl-list__item">
+              <span  class="mdl-list__item-primary-content">
+                <i class="material-icons mdl-list__item-icon">person</i>
+                {{ member.username }}
+              </span>
+              <button *ngIf="currentUser == member.username" [disabled]="ajaxCall" (mouseenter)="upgradeDom()" (click)="leaveTeam(team.team_id)" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Leave
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+  </div>
+
+</div>
