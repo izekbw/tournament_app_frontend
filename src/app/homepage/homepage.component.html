@@ -5,30 +5,9 @@
   </span>
 
   <div [hidden]="!ajaxCall" id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-
-  <div *ngIf="games" class="full-width">
-    <h2>Our featured games</h2>
-
-    <div *ngIf="games" class="games-section">
-      <div *ngFor="let game of games" class="single-game col-sm-6 col-xs-12">
-        <div class="game-images">
-          <img class="game-image" src="{{ apiImgUrl + game.imageUrl }}" alt="game-image">
-          <img class="game-logo" src="{{ apiImgUrl + game.logoUrl }}" alt="logo-url">
-        </div>
-        <div class="game-info">
-          <span class="header-text">{{ game.name }}</span>
-          <span>{{ game.description }}</span>
-        </div>
-        <a class="website-link" href="{{ game.website }}">
-          <button (mouseenter)="upgradeDom()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Go to website!
-          </button>
-        </a>
-      </div>
-    </div>
-    <hr>
+  <div class="games-section">
     <div class="homepage-section col-sm-6 col-xs-12">
-      <h3>Compete in Tournaments!</h3>
+      <h3>Compete!</h3>
       <ul class="mdl-list">
         <li class="mdl-list__item">
             <span class="mdl-list__item-primary-content">
@@ -49,6 +28,51 @@
             </span>
         </li>
       </ul>
+    </div>
+    <div class="homepage-section col-sm-6 col-xs-12">
+      <h3>How it works?</h3>
+      <ul class="mdl-list">
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+              <i class="material-icons mdl-list__item-icon accent">control_point</i>
+              Join a tournament with your team
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+              <i class="material-icons mdl-list__item-icon accent">games</i>
+              Play a game against the enemy and report the result
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+              <i class="material-icons mdl-list__item-icon accent">redo</i>
+              Advance in the tournament or try again
+            </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="games" class="full-width">
+    <h2>Our featured games</h2>
+
+    <div *ngIf="games" class="games-section">
+      <div *ngFor="let game of games" class="single-game col-sm-6 col-xs-12">
+        <div class="game-images">
+          <img class="game-image" src="{{ apiImgUrl + game.imageUrl }}" alt="game-image">
+          <img class="game-logo" src="{{ apiImgUrl + game.logoUrl }}" alt="logo-url">
+        </div>
+        <div class="game-info">
+          <span class="header-text">{{ game.name }}</span>
+          <span>{{ game.description }}</span>
+        </div>
+        <a class="website-link" href="{{ game.website }}">
+          <button (mouseenter)="upgradeDom()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Go to website!
+          </button>
+        </a>
+      </div>
     </div>
   </div>
 

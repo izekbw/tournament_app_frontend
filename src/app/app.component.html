@@ -18,7 +18,8 @@
       <a (click)="toggleMaterialDrawer()" *ngIf="currentUser" class="mdl-navigation__link" routerLink="/teams/">
         <i class="material-icons">label_important</i> My teams
       </a>
-      <a (click)="toggleMaterialDrawer()" *ngFor="let game of games" class="mdl-navigation__link" routerLink="/tournaments/{{ game.id }}/{{ game.shortName }}">
+      <a (click)="toggleMaterialDrawer()" *ngFor="let game of games" class="mdl-navigation__link"
+         routerLink="/tournaments/{{ game.id }}/{{ game.shortName }}">
         <i class="material-icons">label_important</i> {{ game.shortName }} Tournaments
       </a>
     </nav>
