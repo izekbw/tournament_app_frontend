@@ -1,0 +1,18 @@
+<div class="tournaments-page col-xs-12">
+  <span *ngIf="popupType" [ngClass]="popupType" class="mdl-chip mdl-chip--deletable">
+      <span class="mdl-chip__text">{{ popupMessage }}</span>
+      <button (click)="closePopup()" type="button" class="mdl-chip__action"><i class="material-icons">cancel</i></button>
+    </span>
+
+  <div [hidden]="!ajaxCall" id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+</div>
+
+<div *ngIf="bracket" class='bracket'>
+  <div *ngFor="let round of bracket" class='round'>
+    <div *ngFor="let team of round" class='match'>
+      <div class='match__content'>
+        <span *ngIf="team.teamName">{{ team.teamName }} ({{ team.leaderName }})</span>
+      </div>
+    </div>
+  </div>
+</div>

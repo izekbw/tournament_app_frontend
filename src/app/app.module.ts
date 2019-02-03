@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TournamentsComponent } from './tournaments/tournaments.component';
 import { TeamsComponent } from './teams/teams.component';
+import { TournamentBracketComponent } from './tournament-bracket/tournament-bracket.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TeamsComponent } from './teams/teams.component';
     RegisterComponent,
     TournamentsComponent,
     TeamsComponent,
+    TournamentBracketComponent,
   ],
   imports: [
     BrowserModule,

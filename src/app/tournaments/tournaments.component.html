@@ -1,4 +1,20 @@
 <div class="tournaments-page col-xs-12">
+  <div class="select-team" *ngIf="show">
+    <ul class="demo-list-item mdl-list">
+      <li *ngFor="let team of teamsWithRoster" class="mdl-list__item" (click)="joinTournament(team.team_id)">
+        <span class="mdl-list__item-primary-content">
+          {{ team.team_name }}
+        </span>
+      </li>
+      <li class="mdl-list__item" (click)="show=false">
+        <span class="mdl-list__item-primary-content">
+          Close
+        </span>
+      </li>
+
+    </ul>
+  </div>
+
   <span *ngIf="popupType" [ngClass]="popupType" class="mdl-chip mdl-chip--deletable">
     <span class="mdl-chip__text">{{ popupMessage }}</span>
     <button (click)="closePopup()" type="button" class="mdl-chip__action"><i class="material-icons">cancel</i></button>
@@ -12,7 +28,7 @@
     <div class="games-section">
       <div *ngFor="let tournament of openTournaments" class="single-game col-sm-4 col-xs-12">
         <div class="game-images">
-          <img class="game-image" src="{{ apiImgUrl + tournament.game.imageUrl }}" alt="game-image">
+          <img class="game-image" src="{{ apiImgUrl + tournament.game.imageUrl }}">
           <img class="game-logo" src="{{ apiImgUrl + tournament.game.logoUrl }}" alt="logo-url">
         </div>
         <div class="game-info">
@@ -20,13 +36,11 @@
           <span>{{ tournament.description }}</span>
         </div>
         <div class="tournament-count tournament-count-active">
-          0 / {{ tournament.teams_number }}
+          {{ tournament.registeredTeams }} / {{ tournament.teams_number }}
         </div>
-        <a *ngIf="currentUser" class="website-link" routerLink="/">
-          <button (mouseenter)="upgradeDom()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Register your team
-          </button>
-        </a>
+        <button (click)="showTeamSelect(tournament.id);" id="register-{{ tournament.id }}"*ngIf="currentUser" (mouseenter)="upgradeDom()" class="website-link mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+          Register your team
+        </button>
       </div>
     </div>
   </div>
@@ -37,7 +51,7 @@
     <div class="games-section">
       <div *ngFor="let tournament of startedTournaments" class="single-game col-sm-4 col-xs-12">
         <div class="game-images">
-          <img class="game-image" src="{{ apiImgUrl + tournament.game.imageUrl }}" alt="game-image">
+          <a routerLink="/tournament/{{ tournament.id }}"><img class="game-image" src="{{ apiImgUrl + tournament.game.imageUrl }}" alt="game-image"></a>
           <img class="game-logo" src="{{ apiImgUrl + tournament.game.logoUrl }}" alt="logo-url">
         </div>
         <div class="game-info">

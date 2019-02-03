@@ -23,6 +23,9 @@ export class TournamentsComponent implements OnInit, OnDestroy {
   apiImgUrl = environment.apiImgUrl;
   currentUser: string;
   currentUserUuid: string;
+  teamsWithRoster: [];
+  selectedTournament: number;
+  show = false;
 
   ngOnInit() {
     this.upgradeDom();
@@ -33,12 +36,48 @@ export class TournamentsComponent implements OnInit, OnDestroy {
       this.gameId = parseInt(params['id'], 10);
       this.getActiveTournaments();
     });
+
+    this.getTeamsWithRoster();
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
+  showTeamSelect(id) {
+    this.selectedTournament = id;
+    this.show = false;
+  }
+
+  joinTournament(teamId) {
+    if (!this.ajaxCall) {
+      this.ajaxCall = true;
+      const data = {
+        'teamId': teamId,
+        'tournamentId': this.selectedTournament,
+        'gameId': this.gameId,
+      };
+
+      this.http.post(environment.apiUrl + 'tournament/register?XDEBUG_SESSION_START=PHPSTORM', data)
+        .subscribe(
+          response => {
+            this.ajaxCall = false;
+            this.popupType = 'success-popup';
+            this.popupMessage = response['message'];
+            this.openTournaments = response['openTournaments'];
+            this.startedTournaments = response['startedTournaments'];
+            this.selectedTournament = null;
+          },
+          error => {
+            this.ajaxCall = false;
+            this.popupType = 'error-popup';
+            this.popupMessage = error['error']['message'];
+            if (!this.popupMessage) {
+              this.popupMessage = 'Unexpected error';
+            }
+          });
+    }
+  }
   getActiveTournaments() {
     this.openTournaments = [];
     this.startedTournaments = [];
@@ -67,6 +106,22 @@ export class TournamentsComponent implements OnInit, OnDestroy {
   upgradeDom() {
     // @ts-ignore
     componentHandler.upgradeDom();
+  }
+
+  getTeamsWithRoster() {
+    this.ajaxCall = true;
+
+    this.http.get(environment.apiUrl + 'team/getAll?uuid=' + this.currentUserUuid)
+      .subscribe(
+        response => {
+          this.ajaxCall = false;
+          this.teamsWithRoster = response['teamsWithRoster'];
+        },
+        error => {
+          this.ajaxCall = false;
+          this.popupType = 'error-popup';
+          this.popupMessage = 'Error in fetching data';
+        });
   }
 
   closePopup() {

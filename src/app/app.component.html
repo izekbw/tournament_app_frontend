@@ -22,6 +22,7 @@
          routerLink="/tournaments/{{ game.id }}/{{ game.shortName }}">
         <i class="material-icons">label_important</i> {{ game.shortName }} Tournaments
       </a>
+      <a class="mdl-navigation__link" *ngIf="currentUser" href="mailto:tournamentAppAdmin@gmail.com">Send Mail</a>
     </nav>
   </div>
   <main class="mdl-layout__content">
